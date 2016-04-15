@@ -27,7 +27,7 @@ public class Sosu {
       
       if (isSosu) { //素数だったら
         if (cnt == LINE_MAX) {  //1行に表示する個数だったら
-          System.out.println(""); //改行する
+          System.out.println(""); //改行する  System.out.print("\n");でも同じ
           cnt = 0; //現在の1行の表示個数を0にする
         }
          cnt++; //表示個数をインクリメント
