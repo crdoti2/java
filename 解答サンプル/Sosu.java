@@ -11,16 +11,16 @@ class Sosu {
 
     for (int i = FROM_NUMBER; i <= TO_NUMBER; i++) {
 
-      boolean b = true; //‘f”‚Æ‚µ‚Ä‚¨‚­
+      boolean isSosu = true; //‘f”‚Æ‚µ‚Ä‚¨‚­
       for (int j = FROM_NUMBER; j <= (i / 2); j++) { //2‚ÅŠ„‚Á‚Ä‚¢‚é——R‚Í2‚æ‚è‚à¬‚³‚È”’l‚ÅŠ„‚é•K—v‚ª‚È‚¢‚½‚ß
         if (i % j == 0) { //Š„‚èØ‚ê‚½‚Ì‚Å‘f”‚Å‚Í‚È‚¢
-          b = false; //‘f”‚Å‚Í‚È‚¢
+          isSosu = false; //‘f”‚Å‚Í‚È‚¢
           break; //‚±‚êˆÈã‚ÍŒvŽZ‚·‚é•K—v‚ª‚È‚¢‚Ì‚Å”²‚¯‚é
         }
       }
 
       
-      if (b) { //‘f”‚¾‚Á‚½‚ç
+      if (isSosu) { //‘f”‚¾‚Á‚½‚ç
         if (cnt == LINE_MAX) {  //1s‚É•\Ž¦‚·‚éŒÂ”‚¾‚Á‚½‚ç
           System.out.println(""); //‰üs‚·‚é
           cnt = 0; //Œ»Ý‚Ì1s‚Ì•\Ž¦ŒÂ”‚ð0‚É‚·‚é
