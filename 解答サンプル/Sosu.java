@@ -1,3 +1,8 @@
+/**
+*
+*　ベタな素数の求め方
+*
+*/
 class Sosu {
   public static int FROM_NUMBER = 2; //開始する値
   public static int TO_NUMBER = 1000; //終了する値
