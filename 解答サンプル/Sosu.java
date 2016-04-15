@@ -3,7 +3,7 @@
 *　ベタな素数の求め方
 *
 */
-class Sosu {
+public class Sosu {
   public static final int FROM_NUMBER = 2; //開始する値
   public static final int TO_NUMBER = 1000; //終了する値
   public static final int LINE_MAX = 10; //1行に表示する個数
