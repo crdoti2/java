@@ -4,10 +4,10 @@
 *
 */
 class Sosu {
-  public static int FROM_NUMBER = 2; //開始する値
-  public static int TO_NUMBER = 1000; //終了する値
-  public static int LINE_MAX = 10; //1行に表示する個数
-  public static String SEPARATE = ","; //区切り文字
+  public static final int FROM_NUMBER = 2; //開始する値
+  public static final int TO_NUMBER = 1000; //終了する値
+  public static final int LINE_MAX = 10; //1行に表示する個数
+  public static final String SEPARATE = ","; //区切り文字
 
 
   public static void main(String[] args) {
