@@ -11,17 +11,17 @@ public class Kadai2 {
 		ArrayList<Integer> evenArray = new ArrayList<Integer>();
 		ArrayList<Integer> oddArray = new ArrayList<Integer>();
 
-		int count=0;
+		
 		for (int i = 0; i < NUM; i++){
-		    array.add(count);
-			count++;
+		    array.add(i);
+			
 		}
 		
 		
 		
 		for (int i = 0; i < result.length; i++){
 			Random rnd = new Random();
-		    result[i] = rnd.nextInt(NUM);
+		    result[i] = rnd.nextInt(NUM+1);
 		}
 		
 		for (int i = 0; i < result.length; i++){
@@ -39,24 +39,24 @@ public class Kadai2 {
 		
 		System.out.print("‹ô”("+evenArray.size()+"):");
        for(int x : evenArray){
-       	   String s = String.valueOf(x);
-		   System.out.print(" "+s);
+		String s = String.valueOf(x);
+       	System.out.print(" "+s);
 
         }
 		
 		System.out.println("");
 		System.out.print("Šï”("+oddArray.size()+"):");
 		for(int x :oddArray){
-       	   String s = String.valueOf(x);
-		   System.out.print(" "+s);
+			String s = String.valueOf(x);
+			System.out.print(" "+s);
 
         }
 		
 		System.out.println("");
 		System.out.print("Žg—p‚µ‚È‚©‚Á‚½’l("+array.size()+"):");
 		for(int x :array){
-       	   String s = String.valueOf(x);
-		   System.out.print(" "+s);
+			String s = String.valueOf(x);
+			System.out.print(" "+s);
 
         }
 		
