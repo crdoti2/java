@@ -14,7 +14,6 @@ public class kadai3 {
 	public static final String SEPARATE = ","; //‹æØ‚è•¶š
 
 
-
 	public static void main (String[] args) {
 		// ƒJƒEƒ“ƒg•Ï”‚ÌéŒ¾
 		int i, j, cnt;
