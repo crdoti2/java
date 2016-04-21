@@ -3,16 +3,20 @@ package test1;
 // キャラクタの基礎となるクラス
 public class Character {
 
-	// ステータス追加
+	// ステータス用
+	public static final int NORMAL = 0;			// ０、異常なし
+	public static final int DIE    = 1;			// １、やられた
+	public static final int STUN   = 2;			// ２、スタン
+
+	// パラメータ追加
 	private int hp;
 	private int mp;
 	private int attack;
 	private int defence;
-	private int posX;
-	private int posY;
-	private int status;			// ステータス：０、異常なし
-								// 　　　　　　１、やられた
-								// 　　　　　　２、スタン
+	private int posX;							// 今のところ使ってない
+	private int posY;							// 今のところ使ってない
+	private int status;
+	int move;
 
 	// コンストラクタ
 	Character(int hp, int mp, int attack, int defence, int posX, int posY, int status) {
@@ -50,6 +54,16 @@ public class Character {
 		return this.status;
 	}
 
+	// posXゲッター
+	public int getPosX() {
+		return this.posX;
+	}
+
+	// posYゲッター
+	public int getPosY() {
+		return this.posY;
+	}
+
 	// HPセッター
 	public void setHp(int hp) {
 		this.hp = hp;
@@ -75,14 +89,24 @@ public class Character {
 		this.status = status;
 	}
 
+	// posXセッター
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	// posYセッター
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
 	// 前へダッシュ
 	public void dash() {
-		this.posX += 5;
+		// 今は何もしない
 	}
 
 	// 後ろへバック
 	public void back() {
-		this.posX -= 3;
+		// 今は何もしない
 	}
 
 	// 攻撃する

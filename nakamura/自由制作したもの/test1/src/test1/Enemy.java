@@ -10,6 +10,7 @@ public class Enemy extends Character {
 	// コンストラクタ起動
 	Enemy(int hp, int mp, int attack, int defence, int posX, int posY, int status) {
 		super(hp, mp, attack, defence, posX, posY, status);
+		move = 3;
 	}
 
 	// attackメソッドを再定義
@@ -29,8 +30,8 @@ public class Enemy extends Character {
 			System.out.printf("しかし、ダメージは与えられなかった！\n");
 		} else {
 
-			// ４以上の与ダメージならかいしんの一撃
-			if(beforePlayerHp - afterPlayerHp >= 4) {
+			// 10以上の与ダメージならかいしんの一撃
+			if(beforePlayerHp - afterPlayerHp >= 10) {
 				System.out.printf("かいしんの一撃！\n");
 			}
 			System.out.printf("%dのダメージを与えた！\n", beforePlayerHp - afterPlayerHp);
@@ -41,9 +42,10 @@ public class Enemy extends Character {
 				p.setStatus(1);
 			}
 
-			// 攻撃した相手をスタンさせる
 			p.setHp(afterPlayerHp);
-			if(p.getStatus() == 0) {
+
+			// 攻撃した相手をスタンさせる
+			if(p.getStatus() == 0 && beforePlayerHp - afterPlayerHp >= 10) {
 				p.stun();
 			}
 		}
@@ -53,6 +55,16 @@ public class Enemy extends Character {
 	public void stun() {
 		this.setStatus(2);
 		System.out.printf("敵はスタンした！\n");
+	}
+
+	// 前へダッシュ
+	public void dash() {
+		this.setPosX(this.getPosX() + move);
+	}
+
+	// 後ろへバック
+	public void back() {
+		this.setPosX(this.getPosX() - move);
 	}
 
 }
