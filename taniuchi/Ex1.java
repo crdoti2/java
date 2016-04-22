@@ -17,7 +17,7 @@ public class Ex1{
 			System.out.println("age1 + age2は" + (age1+age2));
 		if(age%2 != 0)//変数age奇数である
 			System.out.println("変数ageは" + (age%2));
-		if(name.equals("湊"))//変数nameの中身の文字列が「湊」と等しい
+		if("湊".equals(name))//変数nameの中身の文字列が「湊」と等しい
 			System.out.println("名前は" + name);
 		//練習3-2
 		//C,D,E
@@ -36,7 +36,7 @@ public class Ex1{
 		
 		//練習3-4
 		boolean tenki = true;
-		if(tenki == true){
+		if(tenki){				//boolean型での条件式では演算子は不要
 			System.out.println("洗濯をします");
 			System.out.println("散歩にいきます");
 		}else{
