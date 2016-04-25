@@ -4,7 +4,7 @@ public class Volf extends Monster {
 
 	// コンストラクタ
 	Volf() {
-		super(500, 10, 20 + new java.util.Random().nextInt(30), "オオカミ");
+		super(500, 150, 20 + new java.util.Random().nextInt(30), "オオカミ");
 	}
 
 	public void attack() {

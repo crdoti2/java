@@ -19,17 +19,24 @@ public class Main {
 
 			// プレイヤーの状態確認
 			System.out.printf("プレイヤーの現在の状態\n");
-			System.out.printf("LEVEL:%d HP:%d EXP:%d ATTACK:%d GOLD:%d\n\n",
-					h.getLevel(), h.getHp(), h.getExp(), h.getAttack(), h.getGold());
+			System.out.printf("LEVEL:%d HP:%d MP:%d EXP:%d ATTACK:%d GOLD:%d\n\n",
+					h.getLevel(), h.getHp(), h.getMp(), h.getExp(), h.getAttack(), h.getGold());
 
 			// 入力を促すメッセージを出力
-			System.out.print("どうする？ 1:戦う 2:買う 3:終了 > ");
+			System.out.print("どうする？ 1:戦う 2:魔法 3:終了 > ");
 			int input = new Scanner(System.in).nextInt();
 
 			// 入力した値の判別
 			if(input == 3) {			// デバッグ用
 				break;
-			} else if(input == 2) {		// 買う
+			} else if(input == 2) {		// 回復する
+				System.out.printf("MPを50消費して回復魔法を唱えますか？ 1:Yes 2:No > \n");
+				input = new Scanner(System.in).nextInt();
+				if(h.getMp() < 50) {
+					System.out.println("MPが足りません");
+				} else if(input == 1) {
+					h.aid();
+				}
 				
 			} else if (input == 1) {	// 戦う
 				
