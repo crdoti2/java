@@ -8,6 +8,7 @@ public class Hero {
 	private int mp;
 	private int level;
 	private int gold;
+	private int sword;
 
 	// 定数の宣言
 	private final int MAX_EXP[] = {    0,  100,  200,   300,   500,   700,  1000,  1500,  2000,
@@ -27,6 +28,7 @@ public class Hero {
 		this.exp = MAX_EXP[1];
 		this.level = 1;
 		this.gold = 1000;
+		this.sword = Weapon.Fragarach();
 	}
 
 	// attackメソッド
@@ -46,8 +48,8 @@ public class Hero {
 			// プレイヤの攻撃
 			if(turn % 2 == 0 || turn <= 4) {
 				System.out.printf("プレイヤーの攻撃！\n");
-				random = new java.util.Random().nextInt((int)((float)this.ATTACK[level] * 0.2f));
-				attack = (int) (((float)this.ATTACK[level] * 0.8f) + (float)random);
+				random = new java.util.Random().nextInt((int)((float)(this.ATTACK[level] + this.sword) * 0.2f));
+				attack = (int) (((float)(this.ATTACK[level] + this.sword) * 0.8f) + (float)random);
 				System.out.printf("%dダメージ！\n", attack);
 				enemyHp = m.getHp() - attack;
 				if(enemyHp <= 0) { enemyHp = 0; }
@@ -90,8 +92,8 @@ public class Hero {
 	// 回復メソッド
 	public void aid() {
 		System.out.println("回復魔法を唱えた！");
-		int aid = new java.util.Random().nextInt(25);
-		aid += 50;
+		int aid = new java.util.Random().nextInt(150);
+		aid += 150;
 		System.out.printf("HPが%d回復した！\n", aid);
 		if(hp + aid >= MAX_HP[level]) {
 			hp = MAX_HP[level];
@@ -134,5 +136,8 @@ public class Hero {
 	}	
 	public void setMp(int mp) {
 		this.mp = mp;
+	}
+	public void setSword(int sword) {
+		this.sword = sword;
 	}	
 }

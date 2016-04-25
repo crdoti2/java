@@ -7,16 +7,18 @@ public abstract class Monster {
 	private int exp;
 	private int gold;
 	private String name;
+	private int recLevel;
 
 	// コンストラクタ
-	Monster(int hp, int exp, int gold, String name) {
+	Monster(int hp, int exp, int gold, int recLevel, String name) {
 		this.hp   = hp;
 		this.exp  = exp;
 		this.gold = gold;
+		this.recLevel = recLevel;
 		this.name = name;
 	}
-	Monster(int hp, String name) {
-		this(hp, 0, 0, name);
+	Monster(int hp, int recLevel, String name) {
+		this(hp, 0, 0, recLevel, name);
 	}
 
 	// メソッドの宣言
@@ -33,6 +35,9 @@ public abstract class Monster {
 	}
 	public int getGold() {
 		return gold;
+	}
+	public int getRecLevel() {
+		return recLevel;
 	}
 	public String getName() {
 		return name;
