@@ -52,10 +52,9 @@ public class Hero {
 			// 敵の攻撃
 			else
 			{
-				System.out.printf("敵の攻撃！\n");
+				System.out.printf("%sの攻撃！\n", m.getName());
 				m.attack();
-				random = new java.util.Random().nextInt((int)((float)m.getAttack() * 0.2f));
-				attack = (int) (((float)m.getAttack() * 0.8f) + (float)random);
+				attack = m.getAttack();
 				System.out.printf("%dダメージ！\n", attack);
 				playerHp = this.hp - attack;
 				if(playerHp <= 0) { playerHp = 0; }
