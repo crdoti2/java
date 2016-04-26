@@ -9,6 +9,7 @@ public class Hero {
 	private int level;
 	private int gold;
 	private int sword;
+	private int protecter;
 
 	// 定数の宣言
 	private final int MAX_EXP[] = {    0,  100,  200,   300,   500,   700,  1000,  1500,  2000,
@@ -29,6 +30,7 @@ public class Hero {
 		this.level = 1;
 		this.gold = 1000;
 		this.sword = Weapon.Fragarach();
+		this.protecter = Protect.Normal();
 	}
 
 	// attackメソッド
@@ -80,7 +82,7 @@ public class Hero {
 			if(exp >= MAX_EXP[level + 1]) {
 				level++;
 				System.out.println("レベルがアップした！");
-				this.hp = MAX_HP[level];
+				this.hp = MAX_HP[level] * protecter;
 				this.mp = MAX_MP[level];
 			} else {
 				System.out.printf("現在のレベル:%d\n", level);
@@ -95,12 +97,19 @@ public class Hero {
 		int aid = new java.util.Random().nextInt(150);
 		aid += 150;
 		System.out.printf("HPが%d回復した！\n", aid);
-		if(hp + aid >= MAX_HP[level]) {
-			hp = MAX_HP[level];
+		if(hp + aid >= MAX_HP[level] * protecter) {
+			hp = MAX_HP[level] * protecter;
 		} else {
 			hp += aid;
 		}
 		mp -= 50;
+	}
+
+	// HPチェックメソッド
+	public void hpCheck() {
+		if(this.hp >= MAX_HP[level] ) {
+			this.hp = MAX_HP[level];
+		}
 	}
 
 	// ゲッターセッターメソッド
@@ -139,5 +148,8 @@ public class Hero {
 	}
 	public void setSword(int sword) {
 		this.sword = sword;
+	}
+	public void setProtecter(int protecter) {
+		this.protecter = protecter;
 	}	
 }

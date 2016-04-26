@@ -9,8 +9,6 @@ public class Main {
 		int i;
 		int input;
 
-		final int WEAPON_TYPE = 3;
-
 		// モンスターの種類
 		final int MONSTER_TYPE = 5;
 		Monster monster[] = new Monster[MONSTER_TYPE];
@@ -26,11 +24,11 @@ public class Main {
 					h.getLevel(), h.getHp(), h.getMp(), h.getExp(), h.getAttack(), h.getGold());
 
 			// 入力を促すメッセージを出力
-			System.out.print("どうする？ 1:戦う 2:魔法 3:装備 4:終了 > ");
+			System.out.print("どうする？ 1:戦う 2:魔法 3:武器 4:防具 5:終了 > ");
 			input = new Scanner(System.in).nextInt();
 
 			// 入力した値の判別
-			if(input == 4) {			// デバッグ用
+			if(input == 5) {			// デバッグ用
 				break;
 			} else if(input == 2) {		// 回復する
 				System.out.printf("\nHPが200前後回復します\n");
@@ -44,7 +42,7 @@ public class Main {
 
 
 			// 装備は今後修正します
-			} else if(input == 3) {		// 装備
+			} else if(input == 3) {		// 武器
 				System.out.printf("何に変えますか？\n");
 				System.out.printf("1:エクスカリバー ATTACK:%4d  必要レベル10以上\n", Weapon.Excalibur());
 				System.out.printf("2:アロンダイト　 ATTACK:%4d  必要レベル 8以上\n", Weapon.Aroundight());
@@ -69,7 +67,25 @@ public class Main {
 					h.setSword(Weapon.Fragarach());
 					System.out.printf("フラガラッハを装備しました\n");
 				}
-				
+			} else if(input == 4) {		// 防具
+				System.out.printf("何に変えますか？\n");
+				System.out.printf("1:ノーマル　　　  HP:%d倍  必要レベル 1以上\n", Protect.Normal());
+				System.out.printf("2:チェインメイル  HP:%d倍  必要レベル 5以上\n", Protect.ChainMail());
+				System.out.printf("3:ブリガンダイン  HP:%d倍  必要レベル10以上\n", Protect.Brigandine());
+				input = new Scanner(System.in).nextInt();
+
+				if(input == 1){
+					h.setProtecter(Protect.Normal());
+					System.out.printf("ノーマルに変更しました\n");
+				} else if(input == 2) {
+					h.setProtecter(Protect.ChainMail());
+					System.out.printf("チェインメイルを装備しました\n");
+				} else if(input == 3) {
+					h.setProtecter(Protect.Brigandine());
+					System.out.printf("ブリガンダインを装備しました\n");
+				}
+				h.hpCheck();
+
 			} else if(input == 1) {	// 戦う
 				
 				monster[0] = new Vish();		// サカナ
@@ -81,7 +97,7 @@ public class Main {
 				// 入力を促すメッセージを出力
 				System.out.printf("\n何と戦う？\n");
 				for(i = 0; i < MONSTER_TYPE; i++) {
-					System.out.printf("%d:%s HP:%5d  推奨レベル%d以上\n", i + 1, monster[i].getName(), monster[i].getHp(), monster[i].getRecLevel());
+					System.out.printf("%d:%s HP:%5d  推奨レベル%2d以上\n", i + 1, monster[i].getName(), monster[i].getHp(), monster[i].getRecLevel());
 				}
 				
 				input = new Scanner(System.in).nextInt();
