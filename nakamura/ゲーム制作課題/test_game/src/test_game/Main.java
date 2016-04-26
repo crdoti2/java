@@ -86,30 +86,38 @@ public class Main {
 				
 				input = new Scanner(System.in).nextInt();
 
-				int dExp;
-				int dGold;
-				boolean combat = true;
-
-				System.out.printf("%sと戦います！\n", monster[input - 1].getName());
-
-				// 戦闘
-				combat = h.attack(monster[input - 1]);
-
-				// 戦闘終了
-				if(combat) {
-					System.out.printf("\n%sを倒した！\n\n", monster[input - 1].getName());
-					dExp = monster[input - 1].getExp();
-					dGold = monster[input - 1].getGold();
-					System.out.printf("経験値%dを手に入れた！\n", dExp);
-					h.setExp(dExp + h.getExp());
-					System.out.printf("%dGoldを手に入れた！\n", dGold);
-					h.setGold(dGold + h.getGold());
-					h.levelConfirmation();
-				}
-
-				if(!combat) {
-					System.out.printf("プレイヤーは倒れた！\n\n");
-					break;
+				if(0 < input && input <= MONSTER_TYPE) {
+					int dExp;
+					int dGold;
+					boolean combat = true;
+	
+					System.out.printf("%sと戦います！\n", monster[input - 1].getName());
+	
+					// 戦闘
+					combat = h.attack(monster[input - 1]);
+	
+					// 戦闘終了
+					if(combat) {
+						System.out.printf("\n%sを倒した！\n\n", monster[input - 1].getName());
+						dExp = monster[input - 1].getExp();
+						dGold = monster[input - 1].getGold();
+						System.out.printf("経験値%dを手に入れた！\n", dExp);
+						h.setExp(dExp + h.getExp());
+						System.out.printf("%dGoldを手に入れた！\n", dGold);
+						h.setGold(dGold + h.getGold());
+						h.levelConfirmation();
+						if(input == 5){
+							System.out.println("世界に平和が訪れた！");
+							break;
+						}
+					}
+	
+					if(!combat) {
+						System.out.printf("プレイヤーは倒れた！\n\n");
+						break;
+					}
+				} else {
+					System.out.println("不正な値が入力されています");
 				}
 				
 			} else {
