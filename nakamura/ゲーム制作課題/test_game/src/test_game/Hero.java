@@ -53,8 +53,13 @@ public class Hero {
 			// プレイヤの攻撃
 			if(turn >= m.getHit()) {
 				System.out.printf("プレイヤーの攻撃！\n");
-				random = new java.util.Random().nextInt((int)((float)(this.ATTACK[level] + this.sword) * 0.2f));
-				attack = (int) (((float)(this.ATTACK[level] + this.sword) * 0.8f) + (float)random);
+
+				random = new java.util.Random().nextInt
+						((int)((float)(this.ATTACK[level] + this.sword) * 0.2f));
+
+				attack = (int) (((float)
+						(this.ATTACK[level] + this.sword) * 0.8f) + (float)random);
+
 				System.out.printf("%dダメージ！\n", attack);
 				enemyHp = m.getHp() - attack;
 				if(enemyHp <= 0) { enemyHp = 0; }

@@ -109,7 +109,8 @@ public class Main {
 				// 入力を促すメッセージを出力
 				System.out.printf("\n何と戦う？\n");
 				for(i = 0; i < MONSTER_TYPE; i++) {
-					System.out.printf("%d:%s HP:%5d  推奨レベル%2d以上\n", i + 1, monster[i].getName(), monster[i].getHp(), monster[i].getRecLevel());
+					System.out.printf("%d:%s HP:%5d  推奨レベル%2d以上\n",i + 1,
+							monster[i].getName(), monster[i].getHp(), monster[i].getRecLevel());
 				}
 
 				// 入力受け付け
@@ -119,8 +120,12 @@ public class Main {
 				if(1 <= input && input <= MONSTER_TYPE) {
 					int dExp;
 					int dGold;
+					int rare = new java.util.Random().nextInt(10);
 					boolean combat = true;
 
+					if(rare == 0 && input == 4) {
+						monster[3] = new RareVeetle();		// レアビートル
+					}
 					System.out.printf("%sと戦います！\n", monster[input - 1].getName());
 	
 					// 戦闘
@@ -129,13 +134,15 @@ public class Main {
 					// 戦闘終了
 					if(combat) {
 						System.out.printf("\n%sを倒した！\n\n", monster[input - 1].getName());
-						dExp = monster[input - 1].getExp();
-						dGold = monster[input - 1].getGold();
-						System.out.printf("経験値%dを手に入れた！\n", dExp);
-						h.setExp(dExp + h.getExp());
-						System.out.printf("%dGoldを手に入れた！\n", dGold);
-						h.setGold(dGold + h.getGold());
-						h.levelConfirmation();
+						if(input != 5) {
+							dExp = monster[input - 1].getExp();
+							dGold = monster[input - 1].getGold();
+							System.out.printf("経験値%dを手に入れた！\n", dExp);
+							h.setExp(dExp + h.getExp());
+							System.out.printf("%dGoldを手に入れた！\n", dGold);
+							h.setGold(dGold + h.getGold());
+							h.levelConfirmation();
+						}
 						if(input == 5){
 							System.out.println("世界に平和が訪れた！");
 							break;
