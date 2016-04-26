@@ -2,6 +2,25 @@ package test_game;
 
 import java.util.Scanner;
 
+import test_game.Hero.Hero;
+import test_game.Monster.Monster;
+import test_game.Monster.RareVeetle;
+import test_game.Monster.VasVoss;
+import test_game.Monster.Veetle;
+import test_game.Monster.Vird;
+import test_game.Monster.Vish;
+import test_game.Monster.Volf;
+import test_game.Protecter.Brigandine;
+import test_game.Protecter.ChainMail;
+import test_game.Protecter.Normal;
+import test_game.Protecter.Protecter;
+import test_game.Sword.Aroundight;
+import test_game.Sword.Excalibur;
+import test_game.Sword.Fragarach;
+import test_game.Sword.GaeBolg;
+import test_game.Sword.Gallatin;
+import test_game.Sword.Sword;
+
 public class Main {
 	public static void main(String[] args) {
 
@@ -14,6 +33,26 @@ public class Main {
 		// モンスターの種類、インスタンス
 		final int MONSTER_TYPE = 5;
 		Monster monster[] = new Monster[MONSTER_TYPE];
+
+		// 武器の種類、インスタンス
+		final int SWORD_TYPE = 5;
+		Sword sword[] = new Sword[SWORD_TYPE];
+
+		// インスタンス化
+		sword[0] = new Excalibur();		// エクスカリバー
+		sword[1] = new Aroundight();	// アロンダイト
+		sword[2] = new Gallatin();		// ガラティーン
+		sword[3] = new GaeBolg();		// ゲイ・ボルグ
+		sword[4] = new Fragarach();		// フラガラッハ
+
+		// 防具の種類、インスタンス
+		final int PROTECTER_TYPE = 3;
+		Protecter protecter[] = new Protecter[PROTECTER_TYPE];
+
+		// インスタンス化
+		protecter[0] = new Normal();		// ノーマル
+		protecter[1] = new ChainMail();		// チェインメイル
+		protecter[2] = new Brigandine();	// ブリガンダイン
 
 		// 主人公インスタンス
 		Hero h = new Hero();
@@ -30,7 +69,7 @@ public class Main {
 			input = new Scanner(System.in).nextInt();
 
 			// 入力した値の判別
-			if(input == 5) {			// 終了
+			if(input == 5) {			// ゲーム終了
 
 				// 終了
 				break;
@@ -52,48 +91,39 @@ public class Main {
 				}
 
 
-			// 装備は今後修正します
+			// 装備
 			} else if(input == 3) {		// 武器
-				System.out.printf("何に変えますか？\n");
-				System.out.printf("1:エクスカリバー ATTACK:%4d  必要レベル10以上\n", Weapon.Excalibur());
-				System.out.printf("2:アロンダイト　 ATTACK:%4d  必要レベル 8以上\n", Weapon.Aroundight());
-				System.out.printf("3:ガラティーン　 ATTACK:%4d  必要レベル 7以上\n", Weapon.Gallatin());
-				System.out.printf("4:ゲイ・ボルグ　 ATTACK:%4d  必要レベル 6以上\n", Weapon.GaeBolg());
-				System.out.printf("5:フラガラッハ　 ATTACK:%4d  必要レベル 5以上\n", Weapon.Fragarach());
-				input = new Scanner(System.in).nextInt();
 
-				if(input == 1){
-					h.setSword(Weapon.Excalibur());
-					System.out.printf("エクスカリバーを装備しました\n");
-				} else if(input == 2) {
-					h.setSword(Weapon.Aroundight());
-					System.out.printf("アロンダイトを装備しました\n");
-				} else if(input == 3) {
-					h.setSword(Weapon.Gallatin());
-					System.out.printf("ガラティーンを装備しました\n");
-				} else if(input == 4) {
-					h.setSword(Weapon.GaeBolg());
-					System.out.printf("ゲイ・ボルグを装備しました\n");
-				} else if(input == 5) {
-					h.setSword(Weapon.Fragarach());
-					System.out.printf("フラガラッハを装備しました\n");
+				// 入力を促すメッセージ
+				System.out.printf("何に変えますか？\n");
+				for(i = 1; i <= SWORD_TYPE; i++) {
+					System.out.printf("%d:%s ATTACK:%4d  必要レベル%d2以上\n", i, sword[i - 1].getName(), sword[i - 1].getAttack(), sword[i - 1].getForLevel());
 				}
-			} else if(input == 4) {		// 防具
-				System.out.printf("何に変えますか？\n");
-				System.out.printf("1:ノーマル　　　  HP:%d倍  必要レベル 1以上\n", Protect.Normal());
-				System.out.printf("2:チェインメイル  HP:%d倍  必要レベル 5以上\n", Protect.ChainMail());
-				System.out.printf("3:ブリガンダイン  HP:%d倍  必要レベル10以上\n", Protect.Brigandine());
+
+				// 入力受け付け
 				input = new Scanner(System.in).nextInt();
 
-				if(input == 1){
-					h.setProtecter(Protect.Normal());
-					System.out.printf("ノーマルに変更しました\n");
-				} else if(input == 2) {
-					h.setProtecter(Protect.ChainMail());
-					System.out.printf("チェインメイルを装備しました\n");
-				} else if(input == 3) {
-					h.setProtecter(Protect.Brigandine());
-					System.out.printf("ブリガンダインを装備しました\n");
+				// 範囲指定
+				if(1 <= input && input <= SWORD_TYPE){
+					h.setSword(sword[input - 1].getAttack());
+					System.out.printf("%sを装備しました\n", sword[input - 1].getName());
+				}
+
+			} else if(input == 4) {		// 防具
+
+				// 入力を促すメッセージ
+				System.out.printf("何に変えますか？\n");
+
+				for(i = 1; i <= PROTECTER_TYPE; i++) {
+					System.out.printf("%d:%s  HP:%d倍  必要レベル%2d以上\n", i, protecter[i - 1].getName(), protecter[i - 1].getDefense(),  protecter[i - 1].getForLevel());
+				}
+
+				
+				input = new Scanner(System.in).nextInt();
+
+				if(1 <= input && input <= PROTECTER_TYPE){
+					h.setProtecter(protecter[input - 1].getDefense());
+					System.out.printf("%sに変更しました\n", protecter[input - 1].getName());
 				}
 				h.hpCheck();
 
