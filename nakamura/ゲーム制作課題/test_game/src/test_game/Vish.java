@@ -4,7 +4,7 @@ public class Vish extends Monster {
 
 	// コンストラクタ
 	Vish() {
-		super(100, 80, 10 + new java.util.Random().nextInt(10), 1, "人食い魚");
+		super(100, 80, 10 + new java.util.Random().nextInt(10), 1, "人食い魚", 2);
 	}
 
 	public void attack() {

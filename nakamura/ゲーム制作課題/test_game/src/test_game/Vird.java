@@ -4,7 +4,7 @@ public class Vird extends Monster {
 
 	// コンストラクタ
 	Vird() {
-		super(800, 250, 40 + new java.util.Random().nextInt(110), 5, "バード  ");
+		super(800, 250, 40 + new java.util.Random().nextInt(110), 5, "バード  ", 5);
 	}
 
 	public void attack() {

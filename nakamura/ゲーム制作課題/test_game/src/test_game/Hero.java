@@ -42,13 +42,16 @@ public class Hero {
 			int playerHp;
 			int enemyHp;
 
+			// どちらかのHPが0以下
 			if(m.getHp() <= 0 || this.hp <= 0 ) {
 				break;
 			}
+
+			// プレイヤ：敵が７：３の確率で攻撃
 			int turn = new java.util.Random().nextInt(10);
 
 			// プレイヤの攻撃
-			if(turn % 2 == 0 || turn <= 4) {
+			if(turn >= m.getHit()) {
 				System.out.printf("プレイヤーの攻撃！\n");
 				random = new java.util.Random().nextInt((int)((float)(this.ATTACK[level] + this.sword) * 0.2f));
 				attack = (int) (((float)(this.ATTACK[level] + this.sword) * 0.8f) + (float)random);
@@ -69,7 +72,7 @@ public class Hero {
 				this.hp = playerHp; 
 			}
 			if(this.mp < MAX_MP[level]) {
-				this.mp++;
+				this.mp += 5;
 			}
 		}
 		if(this.hp <= 0) { return false; }

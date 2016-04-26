@@ -7,13 +7,15 @@ public class Main {
 
 		// カウント変数
 		int i;
+
+		// 入力受け付け用変数
 		int input;
 
-		// モンスターの種類
+		// モンスターの種類、インスタンス
 		final int MONSTER_TYPE = 5;
 		Monster monster[] = new Monster[MONSTER_TYPE];
 
-		// インスタンス
+		// 主人公インスタンス
 		Hero h = new Hero();
 
 		while(true) {
@@ -28,12 +30,21 @@ public class Main {
 			input = new Scanner(System.in).nextInt();
 
 			// 入力した値の判別
-			if(input == 5) {			// デバッグ用
+			if(input == 5) {			// 終了
+
+				// 終了
 				break;
+
 			} else if(input == 2) {		// 回復する
+
+				// 入力を促すメッセージ
 				System.out.printf("\nHPが200前後回復します\n");
 				System.out.printf("MPを50消費して回復魔法を唱えますか？ 1:Yes 2:No > \n");
+
+				// 入力受け付け
 				input = new Scanner(System.in).nextInt();
+
+				// MPがあるかどうか確認
 				if(h.getMp() < 50) {
 					System.out.println("MPが足りません");
 				} else if(input == 1) {
@@ -86,8 +97,9 @@ public class Main {
 				}
 				h.hpCheck();
 
-			} else if(input == 1) {	// 戦う
-				
+			} else if(input == 1) {		// 戦う
+
+				// インスタンス化
 				monster[0] = new Vish();		// サカナ
 				monster[1] = new Volf();		// オオカミ
 				monster[2] = new Vird();		// バード
@@ -99,14 +111,16 @@ public class Main {
 				for(i = 0; i < MONSTER_TYPE; i++) {
 					System.out.printf("%d:%s HP:%5d  推奨レベル%2d以上\n", i + 1, monster[i].getName(), monster[i].getHp(), monster[i].getRecLevel());
 				}
-				
+
+				// 入力受け付け
 				input = new Scanner(System.in).nextInt();
 
-				if(0 < input && input <= MONSTER_TYPE) {
+				// 入力した値が1～5なのかチェック
+				if(1 <= input && input <= MONSTER_TYPE) {
 					int dExp;
 					int dGold;
 					boolean combat = true;
-	
+
 					System.out.printf("%sと戦います！\n", monster[input - 1].getName());
 	
 					// 戦闘

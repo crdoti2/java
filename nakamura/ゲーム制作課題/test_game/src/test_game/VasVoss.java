@@ -4,7 +4,7 @@ public class VasVoss extends Monster {
 
 	// コンストラクタ
 	VasVoss() {
-		super(20000, 15, "ボス    ");
+		super(20000, 15, "ボス    ", 1);
 	}
 
 	public void attack() {

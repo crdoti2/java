@@ -4,7 +4,7 @@ public class Veetle extends Monster {
 
 	// コンストラクタ
 	Veetle() {
-		super(2000, 400, 120 + new java.util.Random().nextInt(280), 10, "ビートル");
+		super(2000, 400, 120 + new java.util.Random().nextInt(280), 10, "ビートル", 2);
 	}
 
 	public void attack() {
