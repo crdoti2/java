@@ -97,7 +97,7 @@ public class Main {
 				// 入力を促すメッセージ
 				System.out.printf("何に変えますか？\n");
 				for(i = 1; i <= SWORD_TYPE; i++) {
-					System.out.printf("%d:%s ATTACK:%4d  必要レベル%d2以上\n", i, sword[i - 1].getName(), sword[i - 1].getAttack(), sword[i - 1].getForLevel());
+					System.out.printf("%d:%s ATTACK:%4d  必要レベル%2d以上\n", i, sword[i - 1].getName(), sword[i - 1].getAttack(), sword[i - 1].getForLevel());
 				}
 
 				// 入力受け付け
