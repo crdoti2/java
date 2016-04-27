@@ -1,0 +1,11 @@
+
+インターフェイス	クラス			クラス
+　IDoku				　Matango		　Anboina
+	poison				attack			Shell
+	angry					+				+
+	kill				   IDoku		   IDoku
+
+プロジェクト「test5」
+
+
+※このテキストデータはサクラエディタで開いて
