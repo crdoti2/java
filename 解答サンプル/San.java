@@ -36,5 +36,4 @@ public class San {
 	  		pY--; //ƒfƒNƒŠƒƒ“ƒg
 	  	}
 	}
-
 }
