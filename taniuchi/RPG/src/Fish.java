@@ -27,7 +27,7 @@ public class Fish extends Enemy{
 
 	public void attack(Human h) {
 		System.out.println("Fishはウロコを投げた！");
-		int takeDamage = new java.util.Random().nextInt(20)+10;
+		takeDamage = new java.util.Random().nextInt(20)+10;
 		h.setHp(h.getHp()-takeDamage);
 		System.out.println(takeDamage+"のダメージ");
 	}

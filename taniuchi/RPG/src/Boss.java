@@ -28,7 +28,7 @@ public class Boss extends Enemy{
 
 	public void attack(Human h) {
 		System.out.println("火炎攻撃！");
-		int takeDamage = new java.util.Random().nextInt(400)+300;
+		takeDamage = new java.util.Random().nextInt(400)+300;
 		h.setHp(h.getHp()-takeDamage);
 		System.out.println(takeDamage+"のダメージ");
 	}
