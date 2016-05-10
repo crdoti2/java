@@ -82,8 +82,10 @@ public class Main {
 					int SaveSize = h.TableCheck();
 					if(SaveSize - 1 == 1) {
 						System.out.printf("どこにデータを保存しますか？(1:上書き保存 or 0:新規保存) > ");
-					} else {
+					} else if(SaveSize < 10) {
 						System.out.printf("どこにデータを保存しますか？(1～%d:上書き保存 or 0:新規保存) > ", SaveSize - 1);
+					} else {
+						System.out.printf("どこにデータを保存しますか？(1～%d:上書き保存) > ", SaveSize - 1);
 					}
 					input = new Scanner(System.in).nextInt();
 					if(0 < input && input < SaveSize) {			// 上書き保存
@@ -95,7 +97,7 @@ public class Main {
 							// 自動生成された catch ブロック
 							e1.printStackTrace();
 						}
-					} else if(input == 0) {						// 新規保存（実際には上書き保存）
+					} else if(input == 0 && SaveSize < 10) {	// 新規保存（実際には上書き保存）
 						try {
 							h.UpdateSaveData(SaveSize);
 							System.out.printf("%dに新規保存しました\n", SaveSize);
@@ -168,8 +170,12 @@ public class Main {
 
 				// 範囲指定
 				if(1 <= input && input <= SWORD_TYPE){
-					h.setSword(sword[input - 1].getAttack());
-					System.out.printf("It was equipped with %s\n", sword[input - 1].getName());
+					if(h.getLevel() >= sword[input - 1].getForLevel()) {
+						h.setSword(sword[input - 1].getAttack());
+						System.out.printf("%sに変更しました\n", sword[input - 1].getName());
+					} else {
+						System.out.printf("レベルが足りません\n");
+					}
 				}
 
 			} else if(input == 4) {		// 防具
@@ -185,8 +191,12 @@ public class Main {
 				input = new Scanner(System.in).nextInt();
 
 				if(1 <= input && input <= PROTECTER_TYPE){
-					h.setProtecter(protecter[input - 1].getDefense());
-					System.out.printf("%sに変更しました\n", protecter[input - 1].getName());
+					if(h.getLevel() >= protecter[input - 1].getForLevel()) {
+						h.setProtecter(protecter[input - 1].getDefense());
+						System.out.printf("%sに変更しました\n", protecter[input - 1].getName());
+					} else {
+						System.out.printf("レベルが足りません\n");
+					}
 				}
 				h.hpCheck();
 
