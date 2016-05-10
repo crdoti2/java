@@ -7,4 +7,8 @@ public class RareVeetle extends Veetle {
 		super(4000, 4000, 240 + new java.util.Random().nextInt(280),
 				10, "レアビートル", 2);
 	}
+	@Override
+	public int getAttack() {
+		return (2500 + new java.util.Random().nextInt(250));
+	}
 }

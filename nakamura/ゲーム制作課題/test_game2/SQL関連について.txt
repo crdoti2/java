@@ -3,5 +3,5 @@
 
 MySQLデータベース名「Game_db」
 
-MySQLテーブル名「hero_table」
+MySQLテーブル名「hero_table2」
 

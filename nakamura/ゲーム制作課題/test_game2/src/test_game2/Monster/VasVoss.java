@@ -4,7 +4,7 @@ public class VasVoss extends Monster {
 
 	// コンストラクタ
 	public VasVoss() {
-		super(20000, 15, "ボス    ", 1);
+		super(100000, 15, "ボス    ", 1);
 	}
 
 	public void attack() {
@@ -18,7 +18,7 @@ public class VasVoss extends Monster {
 
 	@Override
 	public int getAttack() {
-		return (1500 + new java.util.Random().nextInt(1500));
+		return (8000 + new java.util.Random().nextInt(5000));
 	}
 
 }
