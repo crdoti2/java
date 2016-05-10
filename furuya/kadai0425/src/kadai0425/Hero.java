@@ -3,7 +3,7 @@ package kadai0425;
 public class Hero {
 
 	static final  String NAME = "ヒーロー";
-	private int exp = 100;
+	
 
 
 	private int level = 1;
@@ -12,6 +12,8 @@ public class Hero {
 	private int attackPower = 30;
 	private int gold = 0;
 	private int omamori = 0;
+	
+	private int exp = 100;
 	
 	
 	public static String getName() {

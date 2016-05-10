@@ -1,20 +1,32 @@
 package kadai0425;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class KadaiMain {
 	static int select1 = 0;
+	static int SaveDataNumber = 0;
 
 	public static void main(String[] args) {
 
 		Random rnd = new Random();
 		Hero h = new Hero();
 		Monster m = null;
+		
+		
 
 		while (true) {
-			System.out.print("\r\n現在の"+h.getName()+"のステータス\r\nLevel:"+h.getLevel()+"\r\nHP:"+h.getHp()+"/"+h.getMaxHp()+"\r\n攻撃力:"+h.getAttackPower()+"\r\nゴールド:"+h.getGold()+"\r\n経験値:"+h.getExp()+"\r\n"+"\r\nお守りの数:"+h.getOmamori()+"\r\n");
-			System.out.print("どうする？ 1:戦う 2:調べる 3:買う 4:終了");
+			//System.out.print("\r\n現在の"+h.getName()+"のステータス\r\nLevel:"+h.getLevel()+"\r\nHP:"+h.getHp()+"/"+h.getMaxHp()+"\r\n攻撃力:"+h.getAttackPower()+"\r\nゴールド:"+h.getGold()+"\r\n経験値:"+h.getExp()+"\r\nお守りの数:"+h.getOmamori()+"\r\n");
+			System.out.print("現在の"+h.getName()+"のステータス\r\n");
+			System.out.printf("  レベル      HP  最大HP  攻撃力 ゴールド  経験値 お守りの数\r\n");
+			 System.out.printf("%8s%8s%8s%8s%9s%8s%11s\r\n\r\n",h.getLevel(),h.getHp(),h.getMaxHp() ,h.getAttackPower() ,h.getGold(), h.getExp() , h.getOmamori());
+			 
+			System.out.print("どうする？ 1:戦う 2:調べる 3:買う 4:セーブ 5:ロード 6:終了");
 			Scanner scan = new Scanner(System.in);
 			select1 = scan.nextInt();
 
@@ -48,14 +60,14 @@ public class KadaiMain {
 
 					if (ran > m.getAttackRate()) {
 						m.attack(h);
-						System.out.print(m.getName() + "の攻撃！");
+						//System.out.print(m.getName() + "の攻撃！");
 						System.out.println(h.getName() + "は" + m.getDamage()
 								+ "のダメージを受けた");
 						System.out.println(h.getName() + "のHPは" + h.getHp()
 								+ "となった\r\n");
 					} else {
 						h.attack(m);
-						System.out.print(h.getName() + "の攻撃！");
+						System.out.print(h.getName() + "の攻撃！\r\n");
 						System.out.println(m.getName() + "は"+ h.getAttackPower() + "のダメージを受けた");
 						System.out.println(m.getName() + "のHPは" + m.getHp()+"となった\r\n");
 					}
@@ -126,7 +138,31 @@ public class KadaiMain {
 				}
 				
 				
-			}else if(select1 == 4) break;
+			}else if(select1 == 4){
+				 System.out.println("どのデータにセーブしますか？");
+				saveData(h);
+				
+				Scanner scan4 = new Scanner(System.in);
+				int sdn = scan4.nextInt();
+				if(sdn>0 && sdn<=10){
+					save(h,sdn);
+				}else System.out.println("1～10を選択してください");
+				
+				
+			}else if(select1 == 5){
+				
+				 System.out.println("どのデータをロードしますか？");
+					saveData(h);
+					
+					Scanner scan5 = new Scanner(System.in);
+					int sdn = scan5.nextInt();
+					if(sdn>0 && sdn<=10){
+						load(h,sdn);
+					}else System.out.println("1～10を選択してください");
+				
+			}else if(select1 == 6){
+				break;
+			}
 
 		}
 
@@ -221,5 +257,152 @@ public class KadaiMain {
 		}
 
 	}
+	
+	
+	
+	
+static public void saveData(Hero h){
+		
+		Connection con = null;
+		//String sql = "INSERT INTO  status  VALUES(?,?,?)";
+		String sql = "SELECT * FROM status";
+		
+		
+		System.out.printf("      No  レベル      HP  最大HP  攻撃力 ゴールド  経験値 お守りの数\r\n");
+
+		
+		try {
+			// JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			// MySQLに接続
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testms","root", "");
+		
+
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			  while (rs.next()) {
+				  //System.out.println(rs.getInt("id") + " " +rs.getInt("level") + " " + rs.getInt("hp")+ " " + rs.getInt("maxhp") + " " + rs.getInt("attackPower") + " " + rs.getInt("gold") + " " + rs.getInt("omamori") + " " + rs.getInt("exp"));
+				  System.out.printf("%8s%8s%8s%8s%8s%9s%8s%11s\r\n",rs.getInt("id"),rs.getInt("level"),rs.getInt("hp") ,rs.getInt("maxhp") ,rs.getInt("attackPower"), rs.getInt("gold") , rs.getInt("omamori") ,rs.getInt("exp"));
+			  }
+			 
+
+		} catch (InstantiationException | IllegalAccessException
+				| ClassNotFoundException e) {
+			System.out.println("JDBCドライバのロードに失敗しました。");
+		} catch (SQLException e) {
+			System.out.println("MySQLに接続できませんでした。");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println("MySQLのクローズに失敗しました。");
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	static public void save(Hero h, int sdn){
+		
+		Connection con = null;
+		//String sql = "INSERT INTO  status  VALUES(?,?,?)";
+		String sql = "update status set level = ?, hp = ?, maxHp = ?, attackPower = ?, gold = ?, omamori = ?, exp = ? where id = ?";
+		
+
+		try {
+			// JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			// MySQLに接続
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testms","root", "");
+			//System.out.println("MySQLに接続できました。");
+
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, h.getLevel());
+			pstmt.setInt(2, h.getHp());
+			pstmt.setInt(3, h.getMaxHp());
+			pstmt.setInt(4, h.getAttackPower());
+			pstmt.setInt(5, h.getGold());
+			pstmt.setInt(6, h.getOmamori());
+			pstmt.setInt(7, h.getExp());
+			pstmt.setInt(8, sdn);
+			
+			int i = pstmt.executeUpdate();
+			//System.out.println("結果：" + i);
+
+			System.out.println("セーブが完了しました\r\n");
+			
+
+		} catch (InstantiationException | IllegalAccessException
+				| ClassNotFoundException e) {
+			System.out.println("JDBCドライバのロードに失敗しました。");
+		} catch (SQLException e) {
+			System.out.println("MySQLに接続できませんでした。");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println("MySQLのクローズに失敗しました。");
+				}
+			}
+		}
+		
+	}
+	
+static public void load(Hero h, int sdn){
+		
+		Connection con = null;
+		String sql = "SELECT * FROM status WHERE id = ?";
+		
+
+		try {
+			// JDBCドライバのロード - JDBC4.0（JDK1.6）以降は不要
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			// MySQLに接続
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testms","root", "");
+			//System.out.println("MySQLに接続できました。");
+
+			
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, sdn);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+			 // System.out.println(rs.getInt("id") + " " +rs.getInt("level") + " " + rs.getInt("hp")+ " " + rs.getInt("maxhp") + " " + rs.getInt("attackPower") + " " + rs.getInt("gold") + " " + rs.getInt("omamori") + " " + rs.getInt("exp"));
+			 h.setLevel(rs.getInt("level"));
+			 h.setHp(rs.getInt("hp"));
+			 h.setMaxHp(rs.getInt("maxhp"));
+			 h.setAttackPower(rs.getInt("attackPower"));
+			 h.setGold(rs.getInt("gold"));
+			 h.setOmamori(rs.getInt("omamori"));
+			 h.setExp( rs.getInt("exp"));
+			}
+			 
+			System.out.println("ロードが完了しました\r\n");
+
+		} catch (InstantiationException | IllegalAccessException
+				| ClassNotFoundException e) {
+			System.out.println("JDBCドライバのロードに失敗しました。");
+		} catch (SQLException e) {
+			System.out.println("MySQLに接続できませんでした。");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println("MySQLのクローズに失敗しました。");
+				}
+			}
+		}
+		
+	}
+
 
 }
