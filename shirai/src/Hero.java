@@ -1,36 +1,32 @@
-package kadai0425;
-
 public class Hero {
 
 	static final  String NAME = "ヒーロー";
-	
+	private int exp = 100;
 
 
 	private int level = 1;
 	private int hp = 200;
 	private int maxHp = 200;
-	private int attackPower = 30;
-	private int gold = 0;
+	private int attackPower = 300;
+	private int gold = 500;
 	private int omamori = 0;
-	
-	private int exp = 100;
-	
-	
-	public static String getName() {
+
+
+	public String getName() {
 		return NAME;
 	}
 
-	
+
 	public int getHp() {
 		return hp;
 	}
 
 	public void setHp(int hp) {
 	 this.hp = hp;
-		
+
 	}
 
-	
+
 
 	public int getMaxHp() {
 		return maxHp;
@@ -57,7 +53,7 @@ public class Hero {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	
+
 	public int getExp() {
 		return exp;
 	}
@@ -69,15 +65,15 @@ public class Hero {
 
 
 	public void addExp(Monster m){
-		this.exp += m.getExp(); 
+		this.exp += m.getExp();
 	}
-	
-	
+
+
 	public int getGold() {
 		return gold;
 	}
-	
-	
+
+
 
 
 	public void setGold(int gold) {
@@ -96,8 +92,9 @@ public class Hero {
 
 
 	public void addGold(Monster m){
-		this.gold += m.getGold(); 
+		this.gold += m.getGold();
 	}
+
 
 	public void attack(Monster m) {
 		m.setHp(m.getHp() - this.attackPower);
@@ -105,5 +102,7 @@ public class Hero {
 				if(m.getHp()<0) m.setHp(0);
 
 	}
+
+
 
 }
