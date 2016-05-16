@@ -7,8 +7,8 @@ public class java21{
 		max = input;
 		int i,j,k;
 		
-		for(i=1;i<=min;i++){
-			for(j=1;j<=max;j++){
+		for(i=1;i<=input;i++){
+			for(j=1;j<=input;j++){
 				if(j==min||j==max){
 					System.out.print(s);
 				}else{

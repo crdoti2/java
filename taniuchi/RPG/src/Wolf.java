@@ -26,7 +26,7 @@ public class Wolf extends Enemy{
 	@Override
 	public void attack(Human h) {
 		System.out.println("Wolfは噛み付いた！");
-		int takeDamage = new java.util.Random().nextInt(20)+30;
+		takeDamage = new java.util.Random().nextInt(20)+30;
 		h.setHp(h.getHp()-takeDamage);
 		System.out.println(takeDamage+"のダメージ");
 	}

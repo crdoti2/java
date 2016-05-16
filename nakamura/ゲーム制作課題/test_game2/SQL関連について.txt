@@ -1,0 +1,7 @@
+
+参照ライブラリ「mysql-connector-java-5.1.38-bin.jar」
+
+MySQLデータベース名「Game_db」
+
+MySQLテーブル名「hero_table2」
+

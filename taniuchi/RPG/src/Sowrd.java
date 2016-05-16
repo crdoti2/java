@@ -1,11 +1,10 @@
-public class Sowrd extends Weapon{
+public class Sowrd extends Weapon {
 	private int attackPower = 50;
 	private int buyGold = 500;
 	private int sellGold = 250;
 	private String name = "ソード";
 
-
-	public Sowrd(){
+	public Sowrd() {
 		super.setName(this.name);
 		super.setAttackPower(this.attackPower);
 		super.setBuyGold(this.buyGold);

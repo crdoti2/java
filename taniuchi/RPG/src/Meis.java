@@ -1,12 +1,11 @@
-public class Meis extends Weapon{
+public class Meis extends Weapon {
 
 	private int attackPower = 30;
 	private int buyGold = 200;
 	private int sellGold = 100;
 	private String name = "メイス";
 
-
-	public Meis(){
+	public Meis() {
 		super.setName(this.name);
 		super.setAttackPower(this.attackPower);
 		super.setBuyGold(this.buyGold);
