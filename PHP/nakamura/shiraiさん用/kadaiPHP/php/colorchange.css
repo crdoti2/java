@@ -1,0 +1,10 @@
+a:link { color: royalblue; text-decoration:none; }
+a:visited { color: royalred; }
+a:hover { color: orange; }
+a:active { color: red; }
+
+.center{
+	background: #ffffff;
+	padding: 20px 0;
+	text-align: center;
+}

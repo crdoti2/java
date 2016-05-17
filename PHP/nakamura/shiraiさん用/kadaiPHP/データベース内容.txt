@@ -1,0 +1,13 @@
+データベース名「shop_db」
+	テーブル名「books」	本の内容を記録したテーブル
+	テーブル名「client」		顧客の内容を記録したテーブル
+
+
+「books」
+	id	title	relesedate	author	price	image	stock
+	id	タイトル	リリース日	著者名	価格	画像	在庫
+
+
+「client」
+	id	name	cart		amount		address
+	id	顧客名	カートの件数	カートの総額	住所
