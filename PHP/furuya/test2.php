@@ -9,6 +9,7 @@
 <style type="text/css">
 input.example2 { width: 300px; }
 
+
  
 
  div.centerForm {
@@ -46,21 +47,16 @@ input.example2 { width: 300px; }
 
     </li>
   <li>
+  
       <label for="address1">著者</label>
       <input type="text" id="address1" name="author" />
     </li>
-  <li>
-      <label for="address2">ID</label>
-    <input  type="text" id="address2" />
+    <li>
+      <label >購入</label>
+    <label for="radio1" ><input type="radio"  name="buyBtn" value="購入済み" id="radio1" />購入済み</label>
+        <label for="radio2"><input type="radio" name="buyBtn" value="未購入" id="radio2"/>未購入</label>
     </li>
- 
-      
-        
-        <label><input type="radio" »
-name="invoice-address" /> Yes</label>
-        <label><input type="radio" »
-name="invoice-address" /> No</label>
-    </li>
+   
   </ol>
 </fieldset>
 

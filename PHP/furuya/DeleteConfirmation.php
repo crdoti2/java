@@ -15,24 +15,22 @@ div.centerForm {
 
 <?php
 
+echo <<< EOM1
+削除しますか？
+<form method="POST" action="./delete.php">
+<input type="hidden" name="id" value={$_POST["id"]}>
+<input type="submit" value="はい"  >
+</form>
+
+<FORM>
+ <INPUT type="button" value="いいえ" onClick="history.back()">
+ </FORM>
+EOM1;
 
 
-		if($_POST['title']==""){
-			$titleB = "no title";
-		}else{
-   			$titleB = $_POST['title'];
-		}
-		
-		$authorB =  $_POST['author'];
-		
 
-   
-   if (isset($_POST["buyBtn"])) {
-		$buyB =  $_POST['buyBtn'];
-   }else{
-		$buyB = "";
-   }
 
+if (isset($_POST["id"])) {
    
    try{
    $dsn = 'mysql:dbname=db_book;host=localhost';
@@ -40,23 +38,17 @@ div.centerForm {
 			$password = '';
 			
 			
+			
 			$dbh = new PDO($dsn, $user, $password);
 
-			print('登録完了しました。<br>');
+			print('接続に成功しました。<br>');
 
 			$dbh->query('SET NAMES utf-8');
-			
-			
-			$stmt = $dbh -> prepare("insert into t_test(name, author, buy,time) values('$titleB', '$authorB', '$buyB',now())");
-			$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-			$stmt->bindParam(':author', $author, PDO::PARAM_STR);
-			$stmt->bindParam(':buy', $buy, PDO::PARAM_STR);
-			$stmt->execute();
-			
-			$sql = "select * from t_test order by id desc limit 1 ";
+						
+			$sql = "select * from t_test where id = ".$_POST["id"];
 			foreach ($dbh->query($sql) as $row) {
 			
-echo <<< EOM
+echo <<< EOM2
 
 
 <div class="centerForm ">
@@ -77,7 +69,7 @@ echo <<< EOM
 </div>
 
 
-EOM;
+EOM2;
 				
     		}
 		}catch (PDOException $e){
@@ -86,8 +78,9 @@ EOM;
 		}
 
 		$dbh = null;
-   
+   }
 ?>
+
 
 
 </body>

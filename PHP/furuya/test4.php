@@ -40,6 +40,13 @@ for ($i = 0; $i <= $_POST['num']-1; $i++) {
 }
 }
 
+
+if (isset($_POST["title"])) {
+   echo $_POST['title'];
+}else{
+ echo "bbbbb";
+}
+
 ?>
 </form>
 </body>

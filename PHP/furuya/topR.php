@@ -2,9 +2,10 @@
 <head>
 <mata charset"utf-8">
 <LINK href="table2.css" rel="stylesheet" type="text/css">
+<LINK href="table4.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 div.centerForm {
- width: 50%;
+ width: 90%;
  margin-left: auto;
  margin-right: auto;
  }
@@ -13,36 +14,18 @@ div.centerForm {
  a:visited { color: mediumvioletred; }
  a:hover { color:  dodgerblue ; text-decoration:underline; }
 
+.header {
+    background-color: hsl(60, 50%, 50%);
+    color: white;
+    padding-left: 5px;
+    border-left: 8px groove hsl(60, 50%, 35%);
+}
+
+
 </style>
 
 </head>
-<body>
-
-<form method="POST" action="./top.php">
-
- <input type="text" name="seach">
-
-
-<?php
- //POST(submit)された値を$selectに取得
- $select="";
- if(isset($_POST['select']))$select=$_POST['select'];
- ?>
-
-<select name="select">
-<option value="name"<?php if($select=='name') echo 'selected';?>>タイトル</option>
-<option value="author"<?php if($select=='author') echo 'selected';?>>著者</option>
-</select>
-
- <input type="submit" value="検索">
-</form>
-
-<form method="POST" action="./top.php">
-<input type="submit" name="buy" value="購入済み">
-<input type="submit" name="buy" value="未購入">
-</form>
-
-
+<body background="C:\\xampp\htdocs\image\back3.jpg">
 
 
 
@@ -52,6 +35,11 @@ $sql="";
 
 
 if (isset($_POST["buy"])) {
+echo <<< EOM
+<h3 class="header">
+検索結果
+</h3>
+EOM;
 
 		$sql = "SELECT * FROM t_test WHERE buy='".$_POST['buy']."'";
 
@@ -67,7 +55,37 @@ if (isset($_POST["seach"])) {
 
 			$sql = "SELECT * FROM t_test  WHERE " .$_POST["select"]. " LIKE '%$seach%' order by name";
 
-  
+if($_POST["select"] =="name"){
+		$seachEntry="タイトル";
+}else if($_POST["select"] =="author"){
+		$seachEntry="著者";
+}
+echo <<< EOM
+
+<h3 class="header">
+検索結果
+</h3>
+
+<div class="centerForm " >
+<table class="sample_03">
+<tbody>
+<tr>
+<th>検索ワード</th>
+<td>{$_POST["seach"]}</td>
+</tr>
+<tr>
+<th>検索項目</th>
+<td>{$seachEntry}</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<HR size=3 style="border:0; border-bottom:medium double #999;">
+
+
+EOM;
    }
    
   
@@ -83,18 +101,25 @@ if (isset($_POST["seach"])) {
 			
 			$dbh = new PDO($dsn, $user, $password);
 
-			print('接続に成功しました。<br>');
+			print('<br>');
 
 			$dbh->query('SET NAMES utf-8');
 			
+			$sum = 0;
+			foreach ($dbh->query($sql) as $row) {
+			$sum++;
 			
+			}
 			
+			if($sum>0){
 			
+			echo "検索結果: ".$sum."件";
 			
 echo <<< EOM1
+
 <form method="POST" name="form" action="./check_delete.php">
 
-<div class="centerForm ">
+<div class="centerForm " >
 <table class="aaa" >
   <tbody>
     <tr>
@@ -112,7 +137,7 @@ echo <<< EOM2
 
  <tr height="50p">
       <td>{$row['id']}</td>
-      <td width="500"><p  align="left"><a href="./detail.php?id='{$row['id']}'" >{$row['name']}</a></p></td>
+      <td width="1500"><p  align="left"><a href="./detail.php?id='{$row['id']}'" >{$row['name']}</a></p></td>
       <td  width="200">{$row['author']}</td>
        <td width="200">{$row['buy']}</td>
        <td><input type="checkbox" name="check[]" value="{$row['id']}"></td>
@@ -123,9 +148,17 @@ EOM2;
     		}
 print('<tbody>');
 print('</table>');
-print('</div>');
-print('<input type="submit" value="削除">');
+print('<br><Div Align="right"><input type="submit" value="削除"></Div>');
 print('</form>');
+
+print('</div>');
+print('<br><Div Align="right"><input type="submit" value="全てにチェックする" name="aaa" onClick="AllCheckedT();" />');
+print('<sapn>				</span>');
+print('<input type="submit" value="全てのチェックを外す" name="aaa" onClick="AllCheckedF();" /></Div><br>');
+
+}else{
+echo "検索結果が見つかりませんでした";
+}
 
 
 		}catch (PDOException $e){
@@ -137,9 +170,6 @@ print('</form>');
 		}
    
 ?>
-
-<input type="submit" value="全てにチェック" name="aaa" onClick="AllCheckedT();" />
-<input type="submit" value="全てのチェックを外す" name="aaa" onClick="AllCheckedF();" />
 
 <script language="JavaScript" type="text/javascript">
 <!--

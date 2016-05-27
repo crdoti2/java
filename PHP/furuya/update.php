@@ -17,6 +17,7 @@ div.centerForm {
 
 
 
+
 		if($_POST['title']==""){
 			$titleB = "no title";
 		}else{
@@ -40,20 +41,29 @@ div.centerForm {
 			$password = '';
 			
 			
+			
 			$dbh = new PDO($dsn, $user, $password);
 
-			print('登録完了しました。<br>');
+			print('接続に成功しました。<br>');
 
 			$dbh->query('SET NAMES utf-8');
 			
 			
-			$stmt = $dbh -> prepare("insert into t_test(name, author, buy,time) values('$titleB', '$authorB', '$buyB',now())");
-			$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-			$stmt->bindParam(':author', $author, PDO::PARAM_STR);
-			$stmt->bindParam(':buy', $buy, PDO::PARAM_STR);
+			
+			
+			
+			$stmt = $dbh -> prepare("update t_test set name =:name, author =:author, buy =:buy, updateTime=now() where id = :value");
+			
+			
+			$stmt->bindParam(':name',   $_POST["title"], PDO::PARAM_STR);
+			$stmt->bindParam(':author', $_POST["author"], PDO::PARAM_STR);
+			$stmt->bindParam(':buy', $_POST["buyBtn"], PDO::PARAM_STR);
+			$stmt->bindValue(':value',  $_POST["id"], PDO::PARAM_INT);
 			$stmt->execute();
 			
-			$sql = "select * from t_test order by id desc limit 1 ";
+			
+			
+			$sql = "select * from t_test where id = ".$_POST["id"];
 			foreach ($dbh->query($sql) as $row) {
 			
 echo <<< EOM
@@ -89,6 +99,10 @@ EOM;
    
 ?>
 
+<form method="POST" action="./edit.php">
+<input type="hidden" name="id" value=<?php echo $_POST["id"]; ?>>
+<input type="submit" value="編集"  >
+</form>
 
 </body>
 </html>
